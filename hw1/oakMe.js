@@ -16,7 +16,7 @@ app.use((ctx) => {
 <li><a href="/gender">性別</a></li>
 </ol>
 </body>
-</html>`;
+</htmL>`;
   } else if (pathname == '/name') {
     ctx.response.body = '林家煒';
   } else if (pathname == '/age') {
@@ -30,4 +30,5 @@ app.use((ctx) => {
 });
 
 console.log('start at : http://127.0.0.1:8000');
+
 await app.listen({ port: 8000 });
