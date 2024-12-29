@@ -1,0 +1,15 @@
+import random
+
+def start(min , max):
+    target = random.randint(min , max)
+    return target
+
+def compare(target , input , min , max):
+    if input >= max or input <= min:
+        return -1
+    elif input == target:
+        return 0
+    elif input > target:
+        return 1
+    elif input < target:
+        return 2
