@@ -1,0 +1,55 @@
+#include <stdio.h> //老師答案我看不懂版
+#define SIZE 30
+
+void baboSort(int data[], char data2[SIZE][3], int n);  //氣泡排序法__比大小//輸入的資料(身分證)、那個card(含array)(乘客)、要跑的次數
+void baboSort(int data[], char data2[SIZE][3], int n){
+    int tmp = 0;   //數字交換用的桌子
+    char tmpChar;  //英文(花色)交換用桌子
+    for ( int i = 0; i < n; i++){     //要比幾次(有幾個數字就比幾次)
+        for ( int j = i+1; j < n; j ++){
+            if( data[i] < data[j]){     //比英文字(左I小右J大)，因為有賦予值所以可以比
+                tmp = data[ i ];
+                data[ i ] = data[j];
+                data[ j ] = tmp;
+                for( int k = 0; k < 3; k ++){  //同一節車廂的乘客要一起換
+                    tmpChar = data2[i][k];
+                    data2[i][k] = data2[j][k];
+                    data2[j][k] = tmpChar;
+                }
+            }
+        }
+    }
+}
+
+int main ( void ){
+    int n = 0, arr[SIZE], tmp;    //輸入，陣列初始值皆=0
+    scanf("%d", &n);     //要輸入的數量
+    char card[SIZE][3];  //二維陣列[幾節車廂][幾位乘客(>3)]
+    for ( int i = 0; i < n; i ++){
+        scanf("%s", card[i]);    //依序將數字存入陣列
+        switch ( card[i][0] ){   //英文字已確認，副值((因為英文字無法比大小
+            case 'C':
+                arr[i] = 0;   //C=梅花，最小
+                break;
+            case 'D':
+                arr[i] = 13;  //D=方塊，前面有13張牌
+                break;
+            case 'H':
+                arr[i] = 26;  //H=紅心，前面有26張牌
+                break;
+            case 'S':
+                arr[i] = 39;  //S=黑桃，前面有39張牌
+                break;
+        }
+        if ( card[i][2] == '\0'){  //判斷是二位數還是一位數
+            arr[i] += (int) (card[i][1] ); 
+        }else{
+            arr[i] += ((int) (card[i][1] ) * 10 + (int) (card[i][2] )); //為什麼要-'0'
+        }
+    }
+    baboSort( arr , card, n);   //數字、花色、輸入幾個數字就跑幾次
+    for( int i = 0; i < n; i ++){
+        printf("%s ", card[i]);  //二維，card包含了array[數字]&花色
+    }
+    puts("");
+} 
